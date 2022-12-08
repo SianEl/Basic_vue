@@ -15,6 +15,8 @@
     <hr />
     <h2>속성 바인딩</h2>
     <div v-bind:title="dynamicTitle">마우스를 올려보세요</div>
+    <input type="text" :disabled="isInputDisabled" />
+    <input v-bind="attrs" />
   </div>
 </template>
 
@@ -27,12 +29,20 @@ export default {
     const addMessage = () => {
       message.value = message.value + '!';
     };
+    const attrs = {
+      id: 'password-id',
+      type: 'password',
+      placeHolder: '비밀번호를 입력해주세요',
+    };
     const rowHtml = ref('<strong>안녕하세요</strong>');
     const dynamicTitle = ref('안녕하세요!!!');
+    const isInputDisabled = ref(true);
     return {
       message,
       rowHtml,
       dynamicTitle,
+      attrs,
+      isInputDisabled,
       addMessage,
     };
   },
