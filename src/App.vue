@@ -1,64 +1,42 @@
 <template>
   <div>
-    <h2>{{ teacher.name }}</h2>
-    <!-- <span>{{ teacher.lectures.length > 0 ? 'Yes' : 'No' }}</span> -->
-    <p>{{ hasLecture }}</p>
-    <p>{{ existLecture() }}</p>
+    <h2 v-if="visible">Hello Vue3!</h2>
+    <h2 v-else>false 입니다.</h2>
+    <button v-on:click="visible = !visible">toggle</button>
     <hr />
-    <p>{{ hasLecture }}</p>
-    <p>{{ existLecture() }}</p>
+    <h2 v-if="type === 'A'">A입니다.</h2>
+    <h2 v-else-if="type === 'B'">B입니다.</h2>
+    <h2 v-else-if="type === 'C'">C입니다.</h2>
+    <h2 v-else>A, B, C가 아닙니다.</h2>
+    <button v-on:click="type = 'A'">A</button>
+    <button v-on:click="type = 'B'">B</button>
+    <button v-on:click="type = 'C'">C</button>
+    <button v-on:click="type = 'D'">D</button>
     <hr />
-    <p>{{ hasLecture }}</p>
-    <p>{{ existLecture() }}</p>
+    <template v-if="visible">
+      <h1>Title</h1>
+      <p>Paragraph 1</p>
+      <p>Paragraph 2</p>
+    </template>
     <hr />
-    <p>{{ fullName }}</p>
+    <h1 v-show="ok">Title 입니다.</h1>
+    <!-- v-show는 렌더링은 되어 있지만 display가none으로 바뀌는 형태, if는 렌더링 자체가 안되는 형태-->
+    <button v-on:click="ok = !ok">show toggle</button>
   </div>
 </template>
 
 <script>
-import { computed, reactive, ref } from 'vue';
+import { ref } from 'vue';
 
 export default {
   setup() {
-    const teacher = reactive({
-      name: '짐코딩',
-      lectures: ['HTML/CSS', 'JavaScript', 'Vue3'],
-    });
-
-    const hasLecture = computed(() => {
-      // console.log 결과가 1번만 나온 것을 보아 computed는 결과를 캐싱처리한다.
-      // 캐싱이 변경되는 시점은 반응형 데이터가 변경되는 시점이다.
-      console.log('computed');
-      return teacher.lectures.length > 0 ? 'Yes' : 'No';
-    });
-
-    const existLecture = () => {
-      console.log('method');
-      return teacher.lectures.length > 0 ? 'Yes' : 'No';
-    };
-
-    const firstName = ref('홍');
-    const lastName = ref('길동');
-
-    const fullName = computed({
-      get() {
-        return firstName.value + ' ' + lastName.value;
-      },
-      set(value) {
-        console.log('value: ', value);
-        console.log(value.split(' '));
-        [firstName.value, lastName.value] = value.split(' '); // 구조분해 할당
-      },
-    });
-
-    console.log('Console 출력: ', fullName.value);
-    fullName.value = '짐 코딩';
-
+    const visible = ref(true);
+    const type = ref('A');
+    const ok = ref(true);
     return {
-      teacher,
-      hasLecture,
-      existLecture,
-      fullName,
+      visible,
+      type,
+      ok,
     };
   },
 };
