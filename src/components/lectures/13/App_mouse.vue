@@ -28,7 +28,7 @@ export default {
       alert('좋아요!!!!!');
     };
 
-    const clickSpan = event => {
+    const clickSpan = () => {
       console.log('clickSpan');
       // alert('좋아요!!');
     };
