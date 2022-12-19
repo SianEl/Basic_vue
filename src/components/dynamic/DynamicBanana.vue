@@ -1,10 +1,9 @@
 <template>
-  <div class="container py-4">
-    <button class="btn btn-primary me-2">사과</button>
-    <button class="btn btn-danger">바나나</button>
-  </div>
+  <AppCard> 바나나 </AppCard>
 </template>
 
-<script setup></script>
+<script setup>
+import AppCard from '../AppCard.vue';
+</script>
 
 <style lang="scss" scoped></style>
