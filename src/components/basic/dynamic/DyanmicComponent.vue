@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { ref, shallowRef } from 'vue';
+import { shallowRef } from 'vue';
 import DynamicApple from './DynamicApple.vue';
 import DynamicBanana from './DynamicBanana.vue';
 
