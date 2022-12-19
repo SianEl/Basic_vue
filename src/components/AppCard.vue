@@ -1,12 +1,12 @@
 <template>
   <div class="card">
-    <div class="card-header">
+    <div v-if="$slots.header" class="card-header">
       <slot name="header">#header</slot>
     </div>
     <div class="card-body">
       <slot :child-message="childMessage">#body</slot>
     </div>
-    <div class="card-footer text-muted">
+    <div v-if="$slots.footer" class="card-footer text-muted">
       <slot name="footer">#footer</slot>
     </div>
   </div>

@@ -7,6 +7,9 @@ import './assets/main.css';
 const app = createApp(App);
 
 // app.component('AppCard', AppCard);
+app.provide('app-message', 'app meesage 입니다.');
+
+app.config.globalProperties.msg = 'hello'; // vue2에서 전역으로 사용했던 방법
 
 app.mount('#app');
 import 'bootstrap/dist/js/bootstrap.js';
