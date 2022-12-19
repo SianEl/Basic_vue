@@ -5,7 +5,7 @@
       <p>staticMessage: {{ staticMessage }}</p>
       <p>message: {{ message }}</p>
       <p>count: {{ count }}</p>
-      <p>appMessage: {{ appMesage }}</p>
+      <p>appMessage: {{ appMessage }}</p>
     </div>
   </div>
 </template>
