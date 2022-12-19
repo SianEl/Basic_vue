@@ -14,59 +14,50 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue';
-
-export default {
-  emits: ['toggleLike'],
-  props: {
-    type: {
-      type: String,
-      default: 'news',
-      validator: value => {
-        return ['news', 'notice'].includes(value);
-      },
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    contents: {
-      type: String,
-      // required: true,
-    },
-    isLike: {
-      type: Boolean,
-      default: false,
-    },
-    obj: {
-      type: Object,
-      // default: {} -> x default: function() 형태로 해야 한다.
-      default: function () {
-        return {};
-      },
+const props = defineProps({
+  type: {
+    type: String,
+    default: 'news',
+    validator: value => {
+      return ['news', 'notice'].includes(value);
     },
   },
-  setup(props, context) {
-    // console.log('props.title: ', props.title);
-    const isLikeClass = computed(() => {
-      return props.isLike ? 'btn-danger' : 'btn-outline-danger';
-    });
-
-    const typeName = computed(() => {
-      return props.type === 'news' ? '뉴스' : '공지사항';
-    });
-
-    const toggleLike = () => {
-      context.emit('toggleLike');
-    };
-
-    return {
-      isLikeClass,
-      typeName,
-      toggleLike,
-    };
+  title: {
+    type: String,
+    required: true,
   },
+  contents: {
+    type: String,
+    // required: true,
+  },
+  isLike: {
+    type: Boolean,
+    default: false,
+  },
+  obj: {
+    type: Object,
+    // default: {} -> x default: function() 형태로 해야 한다.
+    default: function () {
+      return {};
+    },
+  },
+});
+
+const emit = defineEmits(['toggleLike']);
+
+// console.log('props.title: ', props.title);
+const isLikeClass = computed(() => {
+  return props.isLike ? 'btn-danger' : 'btn-outline-danger';
+});
+
+const typeName = computed(() => {
+  return props.type === 'news' ? '뉴스' : '공지사항';
+});
+
+const toggleLike = () => {
+  emit('toggleLike');
 };
 </script>
 
