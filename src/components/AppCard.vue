@@ -1,71 +1,24 @@
 <template>
   <div class="card">
+    <div class="card-header">
+      <slot name="header">#header</slot>
+    </div>
     <div class="card-body">
-      <!-- type: news, notice -->
-      <span class="badge bg-secondary">{{ typeName }}</span>
-      <h5 class="card-title mt-2">{{ title }}</h5>
-      <p class="card-text">
-        {{ contents }}
-      </p>
-      <a href="#" class="btn" :class="isLikeClass" @click="toggleLike()">
-        좋아요
-      </a>
+      <slot :child-message="childMessage">#body</slot>
+    </div>
+    <div class="card-footer text-muted">
+      <slot name="footer">#footer</slot>
     </div>
   </div>
 </template>
 
 <script>
-import { computed } from 'vue';
+import { ref } from 'vue';
 
 export default {
-  emits: ['toggleLike'],
-  props: {
-    type: {
-      type: String,
-      default: 'news',
-      validator: value => {
-        return ['news', 'notice'].includes(value);
-      },
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    contents: {
-      type: String,
-      // required: true,
-    },
-    isLike: {
-      type: Boolean,
-      default: false,
-    },
-    obj: {
-      type: Object,
-      // default: {} -> x default: function() 형태로 해야 한다.
-      default: function () {
-        return {};
-      },
-    },
-  },
-  setup(props, context) {
-    // console.log('props.title: ', props.title);
-    const isLikeClass = computed(() => {
-      return props.isLike ? 'btn-danger' : 'btn-outline-danger';
-    });
-
-    const typeName = computed(() => {
-      return props.type === 'news' ? '뉴스' : '공지사항';
-    });
-
-    const toggleLike = () => {
-      context.emit('toggleLike');
-    };
-
-    return {
-      isLikeClass,
-      typeName,
-      toggleLike,
-    };
+  setup() {
+    const childMessage = ref('자식컴포넌트입니다.');
+    return { childMessage };
   },
 };
 </script>

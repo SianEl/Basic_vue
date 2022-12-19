@@ -17,6 +17,9 @@ module.exports = {
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-unused-vars': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-unused-components':
+      process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'prettier/prettier': [
       'error',
       {
