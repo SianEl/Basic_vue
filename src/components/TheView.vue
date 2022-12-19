@@ -1,6 +1,9 @@
 <template>
   <main>
     <div class="container py-4">
+      <PostCreate @create-post="createPost"></PostCreate>
+      <hr class="my-4" />
+
       <div class="row g-3">
         <div class="col col-4">
           <AppCard title="제목1" contents="내용1"></AppCard>
@@ -29,27 +32,44 @@
             @toggle-like="post.isLike = !post.isLike"
           ></app-card>
         </div>
-        <template v-for="(item, index) in posts" :key="index">
-          <div class="col col-4">
-            <AppCard
-              v-bind="item"
-              @toggle-like="item.isLike = !item.isLike"
-            ></AppCard>
-          </div>
-        </template>
+        <div v-for="(item, index) in posts" :key="index" class="col col-4">
+          <AppCard
+            v-bind="item"
+            @toggle-like="item.isLike = !item.isLike"
+          ></AppCard>
+        </div>
       </div>
+
+      <hr class="my-4" />
+      <!-- 
+        사용자 정의 컴포넌트
+        modelValue = props
+        update:modelValue = event
+      -->
+      <LabelInput v-model="username" label="이름"></LabelInput>
+      <LabelTitle v-model:title="username" label="제목"></LabelTitle>
     </div>
   </main>
 </template>
 
 <script>
-import { reactive } from 'vue';
-import AppCard from './AppCard.vue';
+import { reactive, ref, watch } from 'vue';
+import AppCard from '@/components/AppCard.vue';
+import PostCreate from '@/components/PostCreate.vue';
+import LabelInput from '@/components/LabelInput.vue';
+import LabelTitle from '@/components/LabelTitle.vue';
 export default {
   components: {
     AppCard,
+    PostCreate,
+    LabelInput,
+    LabelTitle,
   },
   setup() {
+    const username = ref('');
+    watch(username, (newValue, oldValue) => {
+      console.log(oldValue, newValue);
+    });
     const post = reactive({
       title: '제목2',
       contents: '내용2',
@@ -64,9 +84,16 @@ export default {
       { title: '제목04', contents: '내용04', isLike: false, type: 'news' },
       { title: '제목05', contents: '내용05', isLike: true, type: 'notice' },
     ]);
+
+    const createPost = newPost => {
+      posts.push(newPost);
+    };
+
     return {
+      username,
       post,
       posts,
+      createPost,
     };
   },
 };
