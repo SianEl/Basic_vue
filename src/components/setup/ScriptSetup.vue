@@ -19,7 +19,7 @@
 <script setup>
 import { ref } from 'vue';
 import PostItem from '@/components/setup/PostItem.vue';
-import TemplateRefsChild from './setup/TemplateRefsChild.vue';
+import TemplateRefsChild from './TemplateRefsChild.vue';
 const msg = 'Hello World';
 const message = ref('');
 const sayHello = () => {
