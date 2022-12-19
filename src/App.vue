@@ -8,8 +8,8 @@
 
 <script>
 import { ref } from 'vue';
-import TheNav from './components/TheNav.vue';
-import TheView from './components/TheView.vue';
+import TheNav from './components/basic/TheNav.vue';
+import TheView from './components/basic/TheView.vue';
 export default {
   components: {
     TheNav,
