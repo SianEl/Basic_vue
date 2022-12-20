@@ -10,9 +10,6 @@ export function getPosts() {
   return posts;
 }
 
-export function getPost(id) {
-  const post = posts.filter(post => {
-    return post.id === id;
-  });
-  return post;
+export function getPostById(id) {
+  return posts.find(item => item.id === id);
 }

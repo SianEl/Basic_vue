@@ -5,18 +5,24 @@
     <div class="row g-3">
       <div v-for="post in posts" :key="post.id" class="col-4">
         <PostItem
-          :title="post.id"
+          :title="post.title"
           :content="post.content"
           :created-at="post.createdAt"
           @click="goPage(post.id)"
         ></PostItem>
       </div>
     </div>
+    <hr class="my-4" />
+    <AppCard>
+      <PostDetailView :id="1"></PostDetailView>
+    </AppCard>
   </div>
 </template>
 
 <script setup>
 import PostItem from '@/components/practice/posts/PostItem.vue';
+import PostDetailView from '@/views/posts/PostDetailView.vue';
+import AppCard from '@/components/practice/AppCard.vue';
 import { ref } from 'vue';
 import { getPosts } from '@/api/posts';
 import { useRouter } from 'vue-router';
