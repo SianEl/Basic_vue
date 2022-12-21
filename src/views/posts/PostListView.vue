@@ -14,7 +14,7 @@
     </div>
     <hr class="my-4" />
     <AppCard>
-      <PostDetailView :id="1"></PostDetailView>
+      <PostDetailView :id="4"></PostDetailView>
     </AppCard>
   </div>
 </template>
@@ -30,8 +30,21 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const posts = ref([]);
 
-const fetchPosts = () => {
-  posts.value = getPosts();
+const fetchPosts = async () => {
+  try {
+    // getPosts() // Promise - 비동기 객체
+    //   .then(response => {
+    //     console.log(response);
+    //   })
+    //   .catch(error => {
+    //     console.log('error', error);
+    //   });
+    const { data } = await getPosts();
+    posts.value = data;
+    // ({data: posts.value} = await getPosts())
+  } catch (error) {
+    console.error(error);
+  }
 };
 fetchPosts();
 const goPage = id => {

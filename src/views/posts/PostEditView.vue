@@ -2,14 +2,24 @@
   <div>
     <h2>게시글 수정</h2>
     <hr class="my-4" />
-    <form @submit.prevent>
+    <form @submit.prevent="edit">
       <div class="mb-3">
         <label for="title" class="form-label">제목</label>
-        <input type="text" class="form-control" id="title" />
+        <input
+          v-model="form.title"
+          type="text"
+          class="form-control"
+          id="title"
+        />
       </div>
       <div class="mb-3">
         <label for="content" class="form-label">내용</label>
-        <textarea class="form-control" id="content" rows="3"></textarea>
+        <textarea
+          v-model="form.content"
+          class="form-control"
+          id="content"
+          rows="3"
+        ></textarea>
       </div>
       <div class="pt-4">
         <button
@@ -26,13 +36,43 @@
 </template>
 
 <script setup>
+import { getPostById, updatePost } from '@/api/posts';
+import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
 const id = route.params.id;
+
+const form = ref({
+  title: null,
+  content: null,
+});
+
+const fetchPost = async () => {
+  const { data } = await getPostById(id);
+  //form.value = { ...data }; // 객체복사하며 대입
+  // 객체복사를 하는 이유는 posts에서 데이터를 수정할 때 주소참조로 인해 연동되면서 값이 변하는 것을 막기 위해
+  setForm(data);
+};
+fetchPost();
+
+const setForm = ({ title, content }) => {
+  form.value.title = title;
+  form.value.content = content;
+};
+
 const goDetailPage = () => {
   router.push({ name: 'PostDetail', params: { id } });
+};
+
+const edit = async () => {
+  try {
+    await updatePost(id, { ...form.value });
+    router.push({ name: 'PostDetail', params: { id } });
+  } catch (error) {
+    console.error(error);
+  }
 };
 </script>
 
