@@ -33,7 +33,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const props = defineProps({
-  id: Number,
+  id: String,
 });
 
 //const route = useRoute();
@@ -47,6 +47,7 @@ const post = ref({});
 
 const fetchPost = async () => {
   try {
+    console.log(typeof props.id);
     const { data } = await getPostById(props.id);
     //form.value = { ...data }; // 객체복사하며 대입
     // 객체복사를 하는 이유는 posts에서 데이터를 수정할 때 주소참조로 인해 연동되면서 값이 변하는 것을 막기 위해

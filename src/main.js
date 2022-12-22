@@ -15,3 +15,9 @@ app.config.globalProperties.msg = 'hello'; // vue2에서 전역으로 사용했�
 
 app.mount('#app');
 import 'bootstrap/dist/js/bootstrap.js';
+
+console.log('MODE', import.meta.env.MODE); // vite.config.js에서 설정 가능 default로 development.
+console.log('BASE_URL', import.meta.env.BASE_URL);
+console.log('PROD', import.meta.env.PROD);
+console.log('DEV', import.meta.env.DEV);
+console.log('VITE_APP_API_URL', import.meta.env.VITE_APP_API_URL);
