@@ -21,7 +21,7 @@
           {{ page }}
         </a>
       </li>
-      <li class="page-item" :class="{ disabled: !(currentPage < pageCount) }">
+      <li class="page-item" :class="isNextPage">
         <a
           class="page-link"
           href="#"

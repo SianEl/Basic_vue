@@ -28,8 +28,12 @@
 
 <script setup>
 defineProps({
-  title: String,
-  content: String,
+  title: {
+    type: String,
+  },
+  content: {
+    type: String,
+  },
 });
 
 defineEmits(['update:title', 'update:content']);

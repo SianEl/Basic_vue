@@ -33,7 +33,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const props = defineProps({
-  id: String,
+  id: [String, Number],
 });
 
 //const route = useRoute();
@@ -73,7 +73,7 @@ const goListPage = () => {
 const goEditPage = () => {
   router.push({
     name: 'PostEdit',
-    params: { id: props.id },
+    params: { id: props.id, test: 'test' },
   });
 };
 
